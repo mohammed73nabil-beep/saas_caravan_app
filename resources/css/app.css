@@ -1,0 +1,621 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../views/**/*.blade.php';
+@source '../js';
+
+@theme {
+    --font-sans: 'Tajawal', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+/* ═══════════════════════════════════════════════════════════
+   THEME VARIABLES
+═══════════════════════════════════════════════════════════ */
+:root {
+    --bg-app: #F0F4F8;
+    --bg-card: #ffffff;
+    --text-primary: #1F2430;
+    --text-secondary: #475569;
+    --border-color: #E4E7EC;
+    
+    --color-primary: #2B5D7C;
+    --color-primary-hover: #224b64;
+    
+    --badge-success-bg: #EBFBEE;
+    --badge-success-text: #2B8A3E;
+    --badge-success-border: #D3F9D8;
+    
+    --badge-warning-bg: #FFF9E6;
+    --badge-warning-text: #B8860B;
+    --badge-warning-border: #FFE066;
+    
+    --badge-danger-bg: #FEF2F2;
+    --badge-danger-text: #C92A2A;
+    
+    --badge-danger-border: #FEE2E2;
+
+    --badge-neutral-bg: #F1F5F9;
+    --badge-neutral-text: #475569;
+    --badge-neutral-border: #E2E8F0;
+
+    --badge-info-bg: #EBF4FA;
+    --badge-info-text: #2B5D7C;
+    --badge-info-border: #BFDBF7;
+
+    --sidebar-bg: #1A2B38;
+    --sidebar-logo-bg: #15222D;
+    --sidebar-border: rgba(255,255,255,0.08);
+    --sidebar-text: #94A3B8;
+    --sidebar-text-hover: #CBD5E1;
+    --sidebar-active-bg: rgba(43,93,124,0.35);
+    --sidebar-active-border: #4A9EDB;
+
+    --table-header-bg: #EEF2F5;
+}
+
+html[data-theme='dark'] {
+    --bg-app: #0F172A;
+    --bg-card: #1E293B;
+    --text-primary: #E2E8F0;
+    --text-secondary: #94A3B8;
+    --border-color: #334155;
+    
+    --color-primary: #4A9EDB;
+    --color-primary-hover: #63B3ED;
+    
+    --badge-success-bg: rgba(47,158,68,0.15);
+    --badge-success-text: #4ADE80;
+    --badge-success-border: rgba(74,222,128,0.2);
+    
+    --badge-warning-bg: rgba(232,163,61,0.15);
+    --badge-warning-text: #FBBF24;
+    --badge-warning-border: rgba(251,191,36,0.2);
+    
+    --badge-danger-bg: rgba(224,49,49,0.15);
+    --badge-danger-text: #F87171;
+    --badge-danger-border: rgba(248,113,113,0.2);
+
+    --badge-neutral-bg: rgba(148,163,184,0.15);
+    --badge-neutral-text: #94A3B8;
+    --badge-neutral-border: rgba(148,163,184,0.2);
+
+    --badge-info-bg: rgba(74,158,219,0.15);
+    --badge-info-text: #63B3ED;
+    --badge-info-border: rgba(74,158,219,0.2);
+
+    --sidebar-bg: #0B131A;
+    --sidebar-logo-bg: #070D12;
+    --sidebar-border: rgba(255,255,255,0.06);
+    --sidebar-text: #94A3B8;
+    --sidebar-text-hover: #E2E8F0;
+    --sidebar-active-bg: rgba(74,158,219,0.25);
+    --sidebar-active-border: #4A9EDB;
+
+    --table-header-bg: #1E293B;
+}
+
+body {
+    background-color: var(--bg-app);
+    color: var(--text-primary);
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SIDEBAR — Dark Premium Theme (both Light and Dark mode)
+═══════════════════════════════════════════════════════════ */
+
+/* Logo area */
+.sidebar-logo {
+    background-color: var(--sidebar-logo-bg);
+    padding: 20px;
+    border-bottom: 1px solid var(--sidebar-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Nav link — default */
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--sidebar-text);
+    margin-bottom: 2px;
+    min-height: 44px;
+    transition: all 0.15s ease;
+    border-right: 3px solid transparent;
+    position: relative;
+}
+.nav-link:hover {
+    background-color: rgba(255,255,255,0.05);
+    color: var(--sidebar-text-hover);
+}
+.nav-link.active {
+    background-color: var(--sidebar-active-bg);
+    color: #FFFFFF;
+    font-weight: 700;
+    border-right-color: var(--sidebar-active-border);
+}
+.nav-link:focus-visible {
+    outline: 2px solid var(--sidebar-active-border);
+    outline-offset: 2px;
+}
+
+/* User card at bottom of sidebar */
+.sidebar-user {
+    padding: 12px;
+    border-top: 1px solid var(--sidebar-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+.sidebar-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: rgba(74,158,219,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #4A9EDB;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   CARD SYSTEM
+═══════════════════════════════════════════════════════════ */
+.card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    padding: 24px;
+}
+.card-clickable {
+    transition: box-shadow 0.15s ease, transform 0.15s ease;
+    cursor: pointer;
+}
+.card-clickable:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transform: translateY(-1px);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   BUTTON SYSTEM — Primary / Secondary / Danger / Icon
+═══════════════════════════════════════════════════════════ */
+
+/* --- Primary --- */
+.btn-primary {
+    background-color: var(--color-primary);
+    color: #ffffff !important;
+    border-radius: 8px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 20px;
+    font-weight: 700;
+    font-size: 14px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    text-decoration: none;
+}
+.btn-primary:hover {
+    background-color: var(--color-primary-hover);
+    box-shadow: 0 4px 12px rgba(43,93,124,0.25);
+    transform: translateY(-1px);
+}
+.btn-primary:active {
+    transform: scale(0.98) translateY(0);
+    box-shadow: none;
+}
+.btn-primary:focus-visible {
+    outline: 2px solid var(--sidebar-active-border);
+    outline-offset: 3px;
+}
+
+/* --- Secondary --- */
+.btn-secondary {
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary) !important;
+    border-radius: 8px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 20px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    text-decoration: none;
+}
+.btn-secondary:hover {
+    background-color: rgba(148,163,184,0.08);
+    border-color: var(--text-secondary);
+}
+.btn-secondary:active {
+    transform: scale(0.98);
+}
+.btn-secondary:focus-visible {
+    outline: 2px solid var(--sidebar-active-border);
+    outline-offset: 3px;
+}
+
+/* --- Danger --- */
+.btn-danger {
+    background-color: transparent;
+    border: 1px solid #E03131;
+    color: #E03131 !important;
+    border-radius: 8px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 20px;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    text-decoration: none;
+}
+.btn-danger:hover {
+    background-color: rgba(224,49,49,0.1);
+    border-color: #C92A2A;
+}
+.btn-danger:active {
+    transform: scale(0.98);
+}
+.btn-danger:focus-visible {
+    outline: 2px solid #E03131;
+    outline-offset: 3px;
+}
+
+/* --- Icon Button (small, circular bg on hover) --- */
+.btn-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    color: var(--text-secondary);
+    text-decoration: none;
+}
+.btn-icon:hover {
+    background-color: rgba(148,163,184,0.1);
+    border-color: var(--border-color);
+}
+.btn-icon.edit:hover  { color: var(--color-primary); background-color: rgba(74,158,219,0.15); border-color: rgba(74,158,219,0.3); }
+.btn-icon.delete:hover { color: #F87171; background-color: rgba(224,49,49,0.15); border-color: rgba(224,49,49,0.3); }
+.btn-icon.view:hover  { color: #4ADE80; background-color: rgba(47,158,68,0.15); border-color: rgba(47,158,68,0.3); }
+.btn-icon:focus-visible {
+    outline: 2px solid var(--sidebar-active-border);
+    outline-offset: 2px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ARROW / NAVIGATION LINKS
+═══════════════════════════════════════════════════════════ */
+.link-with-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+.link-with-arrow svg {
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+}
+.link-with-arrow:hover {
+    color: var(--color-primary);
+}
+.link-with-arrow:hover svg {
+    transform: translateX(-4px);
+}
+
+/* Back button variant */
+.btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-card);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.15s ease;
+    min-height: 40px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.btn-back svg {
+    transition: transform 0.2s ease;
+}
+.btn-back:hover {
+    background-color: rgba(148,163,184,0.08);
+    border-color: var(--text-secondary);
+    color: var(--color-primary);
+}
+.btn-back:hover svg {
+    transform: translateX(-4px);
+}
+.btn-back:focus-visible {
+    outline: 2px solid var(--sidebar-active-border);
+    outline-offset: 2px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   BADGE SYSTEM
+═══════════════════════════════════════════════════════════ */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 1.5;
+    white-space: nowrap;
+}
+.badge-success {
+    background-color: var(--badge-success-bg);
+    color: var(--badge-success-text);
+    border: 1px solid var(--badge-success-border);
+}
+.badge-warning {
+    background-color: var(--badge-warning-bg);
+    color: var(--badge-warning-text);
+    border: 1px solid var(--badge-warning-border);
+}
+.badge-danger {
+    background-color: var(--badge-danger-bg);
+    color: var(--badge-danger-text);
+    border: 1px solid var(--badge-danger-border);
+}
+.badge-neutral {
+    background-color: var(--badge-neutral-bg);
+    color: var(--badge-neutral-text);
+    border: 1px solid var(--badge-neutral-border);
+}
+.badge-info {
+    background-color: var(--badge-info-bg);
+    color: var(--badge-info-text);
+    border: 1px solid var(--badge-info-border);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   TABLE SYSTEM — Premium Headers + Hover Rows
+═══════════════════════════════════════════════════════════ */
+.premium-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+.premium-table thead tr {
+    background-color: var(--table-header-bg);
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+.premium-table thead th {
+    padding: 12px 16px;
+    text-align: right;
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.3px;
+    border-bottom: 2px solid var(--color-primary);
+    white-space: nowrap;
+}
+.premium-table tbody tr {
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.1s ease;
+}
+.premium-table tbody tr:last-child {
+    border-bottom: none;
+}
+.premium-table tbody tr:hover {
+    background-color: rgba(148,163,184,0.04);
+}
+.premium-table tbody td {
+    padding: 12px 16px;
+    vertical-align: middle;
+    color: var(--text-primary);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   FORM INPUTS
+═══════════════════════════════════════════════════════════ */
+.form-input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--text-primary);
+    background-color: var(--bg-card);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    outline: none;
+}
+.form-input:focus {
+    border-color: var(--sidebar-active-border);
+    box-shadow: 0 0 0 3px rgba(74,158,219,0.15);
+}
+.form-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   FLASH MESSAGES
+═══════════════════════════════════════════════════════════ */
+.flash-success {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: var(--badge-success-bg);
+    border: 1px solid var(--badge-success-border);
+    color: var(--badge-success-text);
+    margin-bottom: 16px;
+}
+.flash-error {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: var(--badge-danger-bg);
+    border: 1px solid var(--badge-danger-border);
+    color: var(--badge-danger-text);
+    margin-bottom: 16px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE — Mobile Stacked Tables
+═══════════════════════════════════════════════════════════ */
+@media (max-width: 767px) {
+    .premium-table thead,
+    .responsive-table thead {
+        display: none !important;
+    }
+    .premium-table tbody tr,
+    .responsive-table tbody tr {
+        display: block !important;
+        background-color: var(--bg-card);
+        border: 1px solid var(--border-color) !important;
+        border-radius: 10px;
+        margin-bottom: 12px;
+        padding: 16px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .premium-table tbody td,
+    .responsive-table tbody td {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 8px 0 !important;
+        border-bottom: 1px solid var(--border-color) !important;
+        text-align: left !important;
+    }
+    .premium-table tbody td:last-child,
+    .responsive-table tbody td:last-child {
+        border-bottom: none !important;
+    }
+    .premium-table tbody td::before,
+    .responsive-table tbody td::before {
+        content: attr(data-label);
+        font-weight: 700;
+        color: var(--text-secondary);
+        margin-left: 8px;
+        font-size: 12px;
+        flex-shrink: 0;
+    }
+
+    /* Stack grid forms */
+    .grid-cols-2, .grid-cols-3, .grid-cols-4 {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SMART DARK THEME COMPATIBILITY OVERRIDES
+═══════════════════════════════════════════════════════════ */
+html[data-theme='dark'] .bg-white,
+html[data-theme='dark'] .bg-slate-50,
+html[data-theme='dark'] .bg-gray-50 {
+    background-color: var(--bg-card) !important;
+}
+
+html[data-theme='dark'] .text-black,
+html[data-theme='dark'] .text-gray-900,
+html[data-theme='dark'] .text-slate-900 {
+    color: var(--text-primary) !important;
+}
+
+html[data-theme='dark'] .text-gray-500,
+html[data-theme='dark'] .text-gray-600,
+html[data-theme='dark'] .text-slate-600 {
+    color: var(--text-secondary) !important;
+}
+
+html[data-theme='dark'] .border,
+html[data-theme='dark'] .border-gray-100,
+html[data-theme='dark'] .border-gray-200,
+html[data-theme='dark'] .border-slate-200 {
+    border-color: var(--border-color) !important;
+}
+
+/* Global inputs & select overrides */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+select,
+textarea {
+    background-color: var(--bg-card) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: var(--text-secondary) !important;
+    opacity: 0.7;
+}
+
+/* Fix any direct white backgrounds in modals or inline page components */
+.modal-content,
+.quick-add-modal {
+    background-color: var(--bg-card) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Inertia / NProgress styling using theme variables */
+#nprogress .bar {
+    background: var(--color-primary) !important;
+    height: 3px !important;
+}
+#nprogress .peg {
+    box-shadow: 0 0 10px var(--color-primary), 0 0 5px var(--color-primary) !important;
+}
+#nprogress .spinner {
+    display: none !important;
+}
+
+
